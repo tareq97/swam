@@ -255,15 +255,21 @@ class Asm[F[_]](implicit F: MonadError[F, Throwable]) {
   }
 
   class I32Const(v: Int) extends AsmInst[F] {
+    var hitcount = 0
     def execute(thread: Frame[F]): Continuation[F] = {
       thread.pushInt(v)
+      hitcount += 1;
+      println("This is where the coverage of Instruction I32Const : " + hitcount)
       Continue
     }
   }
 
   class I64Const(v: Long) extends AsmInst[F] {
+    var hitcount = 0
     def execute(thread: Frame[F]): Continuation[F] = {
       thread.pushLong(v)
+      hitcount += 1;
+      println("This is where the coverage of Instruction I64Const : " + hitcount)
       Continue
     }
   }
@@ -271,6 +277,7 @@ class Asm[F[_]](implicit F: MonadError[F, Throwable]) {
   class F32Const(v: Float) extends AsmInst[F] {
     def execute(thread: Frame[F]): Continuation[F] = {
       thread.pushFloat(v)
+
       Continue
     }
   }
