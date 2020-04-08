@@ -17,7 +17,19 @@
 package swam
 package syntax
 
-sealed abstract class Inst(val opcode: OpCode)
+sealed abstract class Inst(val opcode: OpCode){
+  def count {
+    val hc = Inst
+    hc.hitCount = hc.hitCount + 1
+    println("Opcode :" + opcode + " -> hitCount = " + hc.hitCount)
+  }
+  count
+}
+
+object Inst{
+  var hitCount = 0
+}
+
 
 /** A value-type constant.
   *
