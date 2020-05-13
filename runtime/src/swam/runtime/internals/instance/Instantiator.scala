@@ -22,6 +22,7 @@ package instance
 import imports._
 import compiler._
 import trace._
+import coverage.Coverage
 
 import cats.effect._
 import cats.implicits._
@@ -90,7 +91,8 @@ private[runtime] class Instantiator[F[_]](engine: Engine[F])(implicit F: Async[F
                        imports: Vector[Interface[F, Type]]): F[Instance[F]] = {
 
     val instance = new Instance[F](module, interpreter)
-
+    var noInst = 0
+    var instIndex = 0
     val (ifunctions, iglobals, itables, imemories) = imports.foldLeft(
       (Vector.empty[Function[F]], Vector.empty[Global[F]], Vector.empty[Table[F]], Vector.empty[Memory[F]])) {
       case ((ifunctions, iglobals, itables, imemories), f: Function[F]) =>
@@ -111,7 +113,20 @@ private[runtime] class Instantiator[F[_]](engine: Engine[F])(implicit F: Async[F
             case _ =>
               None
           })
-        new FunctionInstance[F](tpe, locals, code, instance, functionName)
+        code.map(x=>{
+          noInst += 1
+          x})
+        println(s"Function No " + (typeIndex + 1) + s": $functionName --------- No of inst : " + noInst)
+        Coverage(module.name,functionName,noInst)
+        noInst = 0
+        new FunctionInstance[F](tpe, locals, code.map(x=>{
+          //val cov= new CoverageInst[F]
+          //val c = new cov.CoverInst
+          //println(s"Hello " + c + "\n" + "Check the type : " + x.getClass() + " \n" + functionName + "\n" + module.name + "\n" + noInst + "\n")
+          Coverage(module.name,functionName,x.getClass.toString,instIndex)
+          instIndex = instIndex + 1
+          x
+        }), instance, functionName)
     }
     instance.globals = iglobals ++ globals
     instance.tables = itables ++ module.tables.map {

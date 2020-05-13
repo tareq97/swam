@@ -20,18 +20,18 @@ package internals
 package interpreter
 
 import instance._
+import swam.runtime.coverage.Coverage
 import trace._
+
+import scala.util.control.NonFatal
 
 import cats._
 import cats.implicits._
-
-import scala.util.control.NonFatal
 
 /** Interpreter of low-level assembly. */
 private[runtime] class Interpreter[F[_]](engine: Engine[F])(implicit F: MonadError[F, Throwable]) {
 
   private val conf = engine.conf
-
   private def makeFrame(instance: Instance[F]): Frame[F] = {
     val inner = new ThreadFrame[F](conf.stack, instance)
     engine.tracer match {
@@ -78,8 +78,15 @@ private[runtime] class Interpreter[F[_]](engine: Engine[F])(implicit F: MonadErr
   }
 
   private def run(thread: Frame[F]): F[Option[Long]] = {
+    var instCount:Int = 0
+    val funcName: Option[String] = thread.functionName
+    val modName : Option[String] = thread.moduleName
+
+    println("Covered in Interpreter")
     def loop(): F[Option[Long]] = {
       val inst = thread.fetch()
+      instCount = instCount + 1
+      println(s"Module name : ${thread.moduleName} ,  Function name : ${thread.functionName} , Instruction name : ${inst.getClass} , Instruction Count ${instCount}")
       inst.execute(thread) match {
         case Continue => loop()
         case Suspend(res) =>
@@ -93,6 +100,7 @@ private[runtime] class Interpreter[F[_]](engine: Engine[F])(implicit F: MonadErr
           }
         case Done(res) =>
           if (thread.isToplevel) {
+
             F.pure(res)
           } else {
             res.foreach(thread.pushValue(_))
@@ -102,12 +110,16 @@ private[runtime] class Interpreter[F[_]](engine: Engine[F])(implicit F: MonadErr
     }
 
     try {
-      loop()
+      val l = loop()
+      println(s"Total count for function :::  $modName , $funcName ,$instCount")
+      Coverage.interpretInstStore(modName, funcName, instCount)
+      l
     } catch {
       case e: ArrayIndexOutOfBoundsException => F.raiseError(new StackOverflowException(thread, e))
       case e: TrapException                  => F.raiseError(e)
       case NonFatal(e)                       => F.raiseError(new TrapException(thread, "unexpected error during interpretation", e))
     }
+
   }
 
   private def invoke(thread: Frame[F], f: Function[F]): Continuation[F] =
