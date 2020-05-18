@@ -8,7 +8,6 @@ Recursive functions are allowed. For instance, having defined [functions to comp
 import swam._
 import text._
 import runtime._
-import formats.DefaultFormatters._
 import cats.effect._
 import java.nio.file.Paths
 
@@ -34,8 +33,8 @@ def time[T](t: => T): T = {
 
 val i = instantiate("fibo.wat")
 
-val naive = i.exports.typed.function1[Long, Long]("naive").unsafeRunSync()
-val clever = i.exports.typed.function1[Long, Long]("clever").unsafeRunSync()
+val naive = i.exports.typed.function[Long, Long]("naive").unsafeRunSync()
+val clever = i.exports.typed.function[Long, Long]("clever").unsafeRunSync()
 ```
 
 This would result in:

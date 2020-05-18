@@ -40,7 +40,7 @@ private[runtime] class Interpreter[F[_]](engine: Engine[F])(implicit F: MonadErr
     }
   }
 
-  def interpret(funcidx: Int, parameters: Vector[Long], instance: Instance[F]): F[Option[Long]] = {
+  def interpret(funcidx: Int, parameters: Vector[Long], instance: Instance[F]): F[Vector[Long]] = {
     // instantiate the top-level thread
     val thread = makeFrame(instance)
     // push the parameters in the stack
@@ -53,7 +53,7 @@ private[runtime] class Interpreter[F[_]](engine: Engine[F])(implicit F: MonadErr
     }
   }
 
-  def interpret(func: Function[F], parameters: Vector[Long], instance: Instance[F]): F[Option[Long]] = {
+  def interpret(func: Function[F], parameters: Vector[Long], instance: Instance[F]): F[Vector[Long]] = {
     // instantiate the top-level thread
     val thread = makeFrame(instance)
     // push the parameters in the stack
@@ -66,7 +66,7 @@ private[runtime] class Interpreter[F[_]](engine: Engine[F])(implicit F: MonadErr
     }
   }
 
-  def interpretInit(tpe: ValType, code: Array[AsmInst[F]], instance: Instance[F]): F[Option[Long]] = {
+  def interpretInit(tpe: ValType, code: Array[AsmInst[F]], instance: Instance[F]): F[Vector[Long]] = {
     // instantiate the top-level thread
     val thread = makeFrame(instance)
     // invoke the function
@@ -77,6 +77,7 @@ private[runtime] class Interpreter[F[_]](engine: Engine[F])(implicit F: MonadErr
     }
   }
 
+<<<<<<< HEAD
   private def run(thread: Frame[F]): F[Option[Long]] = {
     var instCount:Int = 0
     val funcName: Option[String] = thread.functionName
@@ -84,6 +85,10 @@ private[runtime] class Interpreter[F[_]](engine: Engine[F])(implicit F: MonadErr
 
     println("Covered in Interpreter")
     def loop(): F[Option[Long]] = {
+=======
+  private def run(thread: Frame[F]): F[Vector[Long]] = {
+    def loop(): F[Vector[Long]] = {
+>>>>>>> upstream/master
       val inst = thread.fetch()
       instCount = instCount + 1
       println(s"Module name : ${thread.moduleName} ,  Function name : ${thread.functionName} , Instruction name : ${inst.getClass} , Instruction Count ${instCount}")

@@ -7,7 +7,6 @@ When a module is instantiated, it is possible to import functions or values from
 ```scala mdoc:silent
 import swam.text._
 import swam.runtime._
-import swam.runtime.formats.DefaultFormatters._
 import cats.effect._
 import java.nio.file.Paths
 
@@ -22,7 +21,7 @@ val f =
       tcompiler <- Compiler[IO](blocker)
       mod <- engine.compile(tcompiler.stream(Paths.get("logged.wat"), true, blocker))
       inst <- mod.importing("console", "log" -> log _).instantiate
-      f <- inst.exports.typed.function1[Int, Int]("add42")
+      f <- inst.exports.typed.function[Int, Int]("add42")
     } yield f
   }.unsafeRunSync()
 ```
@@ -43,7 +42,7 @@ Blocker[IO].use { blocker =>
     tcompiler <- Compiler[IO](blocker)
     mod <- engine.compile(tcompiler.stream(Paths.get("logged.wat"), true, blocker))
     inst <- mod.importing("console", "log" -> log _ :: "colors" -> 256 :: HNil).instantiate
-    f <- inst.exports.typed.function1[Int, Int]("add42")
+    f <- inst.exports.typed.function[Int, Int]("add42")
   } yield f
 }
 ```
