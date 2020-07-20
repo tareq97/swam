@@ -16,18 +16,27 @@ Currently, the coverage tool has all the options available, similar to the run c
 --covf - Enables the filter and provides the coverage report and showmap without the Wasi Methods.
 
 ###### Generic Command
+```
 ./mill cli.run coverage --covf <True/false> <br /> 
 --covout <Path / Default Path if not provided> <br /> 
 --wat<if executing coverage on wat> <br /> 
 --wasi <if the wasm file uses wasi-libc functions> <br /> 
 Wat_Wasm_File_Path<Wasm or Wat file path> <br /> 
-
+```
 ###### Sample example command shown below
 
-Linux Systems:
+On Linux System:
 sudo mill cli.run coverage --covf --covout /home/user/Desktop/ --wasi Deconvolution-1D.wasm
 
+After running this command the if the run is successfull a separate folder "cov_results" is generated in the directory /home/user/Desktop. The coverage results are saved with a folder name of the wasm file appended with "_covreport". 
 
+This folder contains the two files one is the coverage report and another one is showmap file.
+
+###### Coverage Report Sample
+Below is the coverage report for Deconvolution-1D.wasm
+
+
+###### Showmap Sample
 
 
 
