@@ -16,11 +16,11 @@ Currently, the coverage tool has all the options available, similar to the run c
 --covf - Enables the filter and provides the coverage report and showmap without the Wasi Methods.
 
 ###### Generic Command
-./mill cli.run coverage --covf <True/false> 
---covout <Path / Default Path if not provided> 
---wat<if executing coverage on wat> 
---wasi <if the wasm file uses wasi-libc functions> 
-Wat_Wasm_File_Path<Wasm or Wat file path>
+./mill cli.run coverage --covf <True/false> <br /> 
+--covout <Path / Default Path if not provided> <br /> 
+--wat<if executing coverage on wat> <br /> 
+--wasi <if the wasm file uses wasi-libc functions> <br /> 
+Wat_Wasm_File_Path<Wasm or Wat file path> <br /> 
 
 ###### Sample example command shown below
 
