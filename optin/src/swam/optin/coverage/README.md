@@ -32,8 +32,10 @@ After running this command the if the run is successfull a separate folder "cov_
 
 This folder contains the two files one is the coverage report and another one is showmap file.
 
-###### Coverage Report Sample
+[Coverage Report Sample](optin/src/swam/optin/coverage/sample-reports/Deconvolution-1D.ic.csv)
 Below is the coverage report for Deconvolution-1D.wasm
+
+
 
 
 ###### Showmap Sample
