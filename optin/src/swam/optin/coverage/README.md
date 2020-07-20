@@ -29,6 +29,5 @@ This folder contains the two files one is the coverage report and another one is
 #### Example reports without Wasi
 
 [Coverage Report Sample](https://github.com/tareq97/swam/blob/feature/opt-in/optin/src/swam/optin/coverage/sample-reports/Deconvolution-1D.ic.csv)
-Below is the coverage report for Deconvolution-1D.wasm
 
 [Showmap Sample](https://github.com/tareq97/swam/blob/feature/opt-in/optin/src/swam/optin/coverage/sample-reports/Deconvolution-1D.showmap.txt)
