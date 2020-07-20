@@ -1,12 +1,5 @@
 # Wasmcov - Coverage Tool for WebAssembly byte code
 
-#### Detailed Summary on Working of Coverage tool
-
-##### What does the tool does not cover?
- The tool 
-
-#### Example reports with Wasi and without Wasi
-
 #### Coverage tool Features
 
 Currently, the coverage tool has all the options available, similar to the run command(--help, --wat,--wasi, --time, --dir ,--traces, --trace-file,--debug, --main), except for the options flag mentioned below that are added to provide the output path for the coverage reports and to filter the wasi-libc methods from the report and showmap.  
@@ -32,15 +25,11 @@ After running this command the if the run is successfull a separate folder "cov_
 
 This folder contains the two files one is the coverage report and another one is showmap file.
 
-[Coverage Report Sample](optin/src/swam/optin/coverage/sample-reports/Deconvolution-1D.ic.csv)
+
+#### Example reports with Wasi and without Wasi
+
+[Coverage Report Sample](https://github.com/tareq97/swam/blob/feature/opt-in/optin/src/swam/optin/coverage/sample-reports/Deconvolution-1D.ic.csv)
 Below is the coverage report for Deconvolution-1D.wasm
 
-
-
-
 ###### Showmap Sample
-
-
-
-
-
+[Showmap Sample](https://github.com/tareq97/swam/blob/feature/opt-in/optin/src/swam/optin/coverage/sample-reports/Deconvolution-1D.showmap.txt)
