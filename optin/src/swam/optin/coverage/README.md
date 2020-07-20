@@ -22,7 +22,7 @@ Wat_Wasm_File_Path<Wasm or Wat file path> <br />
 ```
 sudo mill cli.run coverage --covf --covout /home/user/Desktop/ --wasi Deconvolution-1D.wasm
 ```
-After running this command the if the run is successfull a separate folder "cov_results" is generated in the directory /home/user/Desktop. The coverage results are saved with a folder name of the wasm file appended with "_covreport". 
+After running the above command a separate folder "cov_results" is generated in the directory /home/user/Desktop. The coverage results are saved with a folder name of the wasm file appended with "_covreport". 
 
 This folder contains the two files one is the coverage report and another one is showmap file.
 
