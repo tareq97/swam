@@ -35,8 +35,11 @@ Generic Command
 
 Sample example command shown below
 On Linux System:
-sudo mill cli.run coverage --cov-filter --seed 10 --covout /home/her/Desktop/without_wasi --wasi optin/test/resources/coverage-test/formal_data/Deconvolution-1D.wasm 
-sudo mill cli.run coverage --cov-filter --func-filter ^__original_main$ --function --covout /home/user/Desktop/ --wasi Deconvolution-1D.wasm
+1. sudo mill cli.run coverage --cov-filter --seed 10 --covout /path/results --wasi optin/test/resources/coverage-test/formal_data/Deconvolution-1D.wasm 
+2. sudo mill cli.run coverage --cov-filter --func-filter ^__original_main$ --function --covout /home/user/Desktop/ --wasi Deconvolution-1D.wasm
+
+After running the first command the coverage reports are saved in the /path/results/cov_results/wasm-file-report/ folder for all the methods in the Wasm module except for the Wasi methods.
+After running the second command the reports are saved in the same path give above. The reports are generated only for the method that match the filter criteria in this case the method name is __original_main.
 
 After running the above command a separate folder "cov_results" is generated in the directory /home/user/Desktop. The coverage results are saved with a folder name of the wasm file appended with "_covreport". 
 
