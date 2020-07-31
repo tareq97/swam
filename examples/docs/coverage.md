@@ -25,7 +25,7 @@ Generic Command
 
 --seed <Integer value>
 
---covout <Path / Default Path if not provided> <br /> 
+--covout </path/cov_results/filename_cov_results / Default Path if not provided> <br /> 
 
 --wat<if executing coverage on wat> <br /> 
 
