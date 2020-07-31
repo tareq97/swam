@@ -18,20 +18,29 @@ Currently, the coverage tool has all the options available, similar to the run c
 
 Generic Command
 
-./mill cli.run coverage --covf <True/false> <br /> 
+./mill cli.run coverage 
+--cov-filter <True/false> <br /> 
+
+--func-filter <String pattern>
+
+--seed <Integer value>
+
 --covout <Path / Default Path if not provided> <br /> 
+
 --wat<if executing coverage on wat> <br /> 
+
 --wasi <if the wasm file uses wasi-libc functions> <br /> 
-Wat_Wasm_File_Path<Wasm or Wat file path> <br /> 
+
+\path\.wasm file<Wasm or Wat file path> <br /> 
 
 Sample example command shown below
 On Linux System:
 sudo mill cli.run coverage --cov-filter --seed 10 --covout /home/her/Desktop/without_wasi --wasi optin/test/resources/coverage-test/formal_data/Deconvolution-1D.wasm 
-sudo mill cli.run coverage --cov-filter func-filter ^__original_main$ --function --covout /home/user/Desktop/ --wasi Deconvolution-1D.wasm
+sudo mill cli.run coverage --cov-filter --func-filter ^__original_main$ --function --covout /home/user/Desktop/ --wasi Deconvolution-1D.wasm
 
-After running the above command a separate folder "cov_results" is generated in the directory /home/user/Desktop. The coverage results are saved with a folder name of the wasm file appended with "_covreport". In this folder
+After running the above command a separate folder "cov_results" is generated in the directory /home/user/Desktop. The coverage results are saved with a folder name of the wasm file appended with "_covreport". 
 
-This folder contains the two files one is the coverage report and another one is showmap file.
+
 Example reports without Wasi
 
 Coverage Report Sample
