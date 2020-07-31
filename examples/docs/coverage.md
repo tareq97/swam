@@ -31,7 +31,7 @@ Generic Command
 
 --wasi <if the wasm file uses wasi-libc functions> <br /> 
 
-\path\.wasm file<Wasm or Wat file path> <br /> 
+/path/.wasm file<Wasm or Wat file path> <br /> 
 
 Sample example command shown below
 On Linux System:
