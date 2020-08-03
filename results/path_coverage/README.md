@@ -25,4 +25,4 @@ if(filter)
   else
     code
 ```    
-The above code prints the coverage as per the instructions in the block.
+The above code prints the coverage as per the instructions in the block. After this I guess we need to just check the entry and exit of the block and apply the Coverage measurement and store the block to block in the Array as expected by the AFL.
