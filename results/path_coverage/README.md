@@ -20,7 +20,7 @@ Now I guess to get the coverage with respect to block needs to be followed as pe
 
 ```
 if(filter)
-  if((index,functionName) is in CFG and not br_if and br and return)
+  if((index,functionName) is in CFG and !(br_if and br and return))
     Wrapper(code)
   else
     code
