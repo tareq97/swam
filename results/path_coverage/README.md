@@ -18,10 +18,11 @@ The below CSV report contains the following columns :
 
 Now I guess to get the coverage with respect to block needs to be followed as per the explaination of Javier:
 
+```
 if(filter)
   if((index,functionName) is in CFG and not br_if and br and return)
     Wrapper(code)
   else
     code
-    
+```    
 The above code prints the coverage as per the instructions in the block.
