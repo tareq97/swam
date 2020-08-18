@@ -60,7 +60,7 @@ def doRunCovWasi(module: Module[IO],
                   wat:Boolean, 
                   wasi: Boolean): CoverageListener[IO] = {
     
-    val coverageListener = CoverageListener[IO](wasi, ".", false, false)
+    val coverageListener = CoverageListener[IO](wasi, ".",false, false, true, false)
 
     Blocker[IO]
       .use { blocker =>
@@ -87,6 +87,7 @@ def doRunCovWasi(module: Module[IO],
 
     for (l <- list) {
       val ModuleCoverageInfo(m, c, t) = l
+      println(l)
       if (m == "add")
         assert(c == 4, t == 4) // 100 % percent covered
     }
@@ -162,9 +163,9 @@ def doRunCovWasi(module: Module[IO],
     TODO more manual test cases to be added.
       */
     "add" - test1("optin/test/resources/coverage-test/add.wat")
-    "check-if" - test2("optin/test/resources/coverage-test/informal_data/wasm_programs/if_else-check-if.wasm")
-    "check-else" - test3("optin/test/resources/coverage-test/informal_data/wasm_programs/if_else-check-else.wasm")
-    "check-for" - test4("optin/test/resources/coverage-test/informal_data/wasm_programs/check-for.wasm")
-    "deconvolution" - test5("optin/test/resources/coverage-test/formal_data/Deconvolution-1D.wasm")
+    //"check-if" - test2("optin/test/resources/coverage-test/informal_data/wasm_programs/if_else-check-if.wasm")
+    //"check-else" - test3("optin/test/resources/coverage-test/informal_data/wasm_programs/if_else-check-else.wasm")
+    //"check-for" - test4("optin/test/resources/coverage-test/informal_data/wasm_programs/check-for.wasm")
+    //"deconvolution" - test5("optin/test/resources/coverage-test/formal_data/Deconvolution-1D.wasm")
   }
 }

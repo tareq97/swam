@@ -128,11 +128,17 @@ class CFGBuilder private {
         case Jump.If(t, f)           => Jump.If(id2postorder(t), id2postorder(f))
       }
     val finalArray = Array.ofDim[BasicBlock](basicBlocks.length)
+    println("This is final array size : " + finalArray.size)
+    println("This is Hash map id2postorder : " + id2postorder.size)
+    println("This is Hash map id2postorder : " + id2postorder)
     postorder(basicBlocks)(0) {
       case (idx, bb @ BasicBlock(id, name, stmts, jump)) =>
+        println(idx)
         finalArray(idx) = BasicBlock(id2postorder(id), name, stmts, jump.map(rejump))(bb.predecessors.map(id2postorder))
+        println(id)
         idx + 1
     }
+    
     new CFG(finalArray)
   }
 
